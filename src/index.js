@@ -1,17 +1,56 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import GifList from './components/GifList';
+import GifModal from './components/GifModal';
+import SearchBar from './components/SearchBar';
+import request from 'superagent';
+import './styles/app.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends React.Component {
+    constructor() {
+        super();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+        this.state = {
+            gifs: [],
+            selectedGif: null,
+            modalIsOpen: false
+        };
+    }
+
+    openModal(gif) {
+        this.setState({
+            modalIsOpen: true,
+            selectedGif: gif
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            modalIsOpen: false,
+            selectedGif: null
+        });
+    }
+
+    handleTermChange(term) {
+        const url = `http://api.giphy.com/v1/gifs/search?q=${term.replace(/\s/g, '+')}&api_key=dc6zaTOxFJmzC`;
+
+        request.get(url, (err, res) => {
+            this.setState({ gifs: res.body.data })
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <SearchBar onTermChange={term => this.handleTermChange(term)}/>
+                <GifList  gifs={this.state.gifs}
+                          onGifSelect={selectedGif => this.openModal(selectedGif) } />
+                <GifModal modalIsOpen={this.state.modalIsOpen}
+                          selectedGif={this.state.selectedGif}
+                          onRequestClose={ () => this.closeModal() } />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
