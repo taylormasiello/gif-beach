@@ -10,11 +10,12 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const AUTH_USER = "AUTH_USER";
 
 const API_URL = "http://api.giphy.com/v1/gifs/search?q=";
-const API_KEY = "&api_key=dc6zaTOxFJmzC";
+const API_KEY = "&api_key=BjR8f8ww9lOSmFwNtkhrpIBVVBDzV9zV";
 
 const config = {
   apiKey: "AIzaSyDQFcCe810d5ej9xm6CaPQ63Vqgb84wygo",
   authDomain: "gif-test-9b585.firebaseapp.com",
+  databaseURL: "https://gif-test-9b585-default-rtdb.firebaseio.com",
   projectId: "gif-test-9b585",
   storageBucket: "gif-test-9b585.appspot.com",
   messagingSenderId: "970283311526",
