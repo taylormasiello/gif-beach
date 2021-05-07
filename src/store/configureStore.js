@@ -1,28 +1,28 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
-import rootReducer from '../reducers';
-import createHistory from 'history/createBrowserHistory';
-import { routerMiddleware } from 'react-router-redux';
+import { createStore, compose, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
+import rootReducer from "../reducers";
+import createHistory from "history/createBrowserHistory";
+import { routerMiddleware } from "react-router-redux";
 
 export const history = createHistory();
 
 export function configureStore(initialState) {
-    const store = createStore(
-        rootReducer,
-        initialState,
-        compose (
-            applyMiddleware(ReduxPromise, routerMiddleware(history)),
-            window.devToolsExtension ? window.devToolsExtension() : f => f
-        )
-    );
+  const store = createStore(
+    rootReducer,
+    initialState,
+    compose(
+      applyMiddleware(reduxThunk, routerMiddleware(history)),
+      window.devToolsExtension ? window.devToolsExtension() : (f) => f
+    )
+  );
 
-    if (module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers', () => {
-            const nextRootReducer = require('../reducers').default;
-            store.replaceReducer(nextRootReducer);
-        });
-    }
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept("../reducers", () => {
+      const nextRootReducer = require("../reducers").default;
+      store.replaceReducer(nextRootReducer);
+    });
+  }
 
-    return store;
+  return store;
 }
