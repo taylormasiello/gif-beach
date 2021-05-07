@@ -12,9 +12,13 @@ const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = '&api_key=dc6zaTOxFJmzC';
 
 const config = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
+    apiKey: "AIzaSyDQFcCe810d5ej9xm6CaPQ63Vqgb84wygo",
+    authDomain: "gif-test-9b585.firebaseapp.com",
+    projectId: "gif-test-9b585",
+    storageBucket: "gif-test-9b585.appspot.com",
+    messagingSenderId: "970283311526",
+    appId: "1:970283311526:web:2d9b0363b6df4bae94ef67",
+    measurementId: "G-6X9GKQ0V41",
 };
 
 Firebase.initializeApp(config);
