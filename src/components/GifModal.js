@@ -24,7 +24,9 @@ const GifModal = (props) => {
           <a href={props.selectedGif.source}>{props.selectedGif.source}</a>
         </p>
 
-        <button onClick={() => props.onRequestClose()}>close</button>
+        <button className="btn-info" onClick={() => props.onRequestClose()}>
+          Close
+        </button>
       </div>
     </Modal>
   );
